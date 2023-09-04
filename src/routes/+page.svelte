@@ -1,12 +1,16 @@
 <script>
   import Editors from "../components/Editors.svelte";
   import Preview from "../components/Preview.svelte";
- 
+  import { fullscreenStore } from "../store/fullscreenStore";
   export let htmlCode = "";
   export let cssCode = "";
-  if (typeof localStorage !== "undefined") {
-    
+  let isFullScreen;
+fullscreenStore.subscribe((value) => {
+  isFullScreen = value;
+  console.log(isFullScreen); // Log the value whenever it changes
+});
 
+  if (typeof localStorage !== "undefined") {
     htmlCode =
       localStorage.getItem("htmlCode") ||
       `<!DOCTYPE html>
@@ -63,11 +67,16 @@ body {
     cssCode = newCssCode;
   }
 </script>
-<div class="flex h-screen">
-  <div class="w-1/2">
-    <Editors bind:htmlCode bind:cssCode {updateCode} />
+{#if isFullScreen}
+  <Editors bind:htmlCode bind:cssCode {updateCode} />
+{:else}
+  <div class="flex flex-col lg:flex-row h-screen">
+    <div class="w-full lg:w-1/2">
+      <Editors bind:htmlCode bind:cssCode {updateCode} />
+    </div>
+    <div class="w-full lg:w-1/2">
+      <Preview {htmlCode} {cssCode} />
+    </div>
   </div>
-  <div class="w-1/2">
-    <Preview {htmlCode} {cssCode} />
-  </div>
-</div>
+{/if}
+
