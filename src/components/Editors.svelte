@@ -46,10 +46,16 @@
         <div class="mockup-browser border bg-base-300">
           <div class="mockup-browser-toolbar">
             <div class="btn-group">
-              <button on:click={showHtml} class="btn btn-sm">HTML</button>
-              <button on:click={showCss} class="btn btn-sm">CSS</button>
+              <button on:click={showHtml} class="btn btn-sm"><Icon
+                icon="vscode-icons:file-type-html"
+                style="font-size: 18px;"
+              /></button>
+              <button on:click={showCss} class="btn btn-sm"> <Icon
+                icon="vscode-icons:file-type-css"
+                style="font-size: 18px;"
+              /></button>
               <button class="btn btn-sm"
-                ><a href="/preview" target="_blank">RUN</a></button
+                ><a href="/preview" target="_blank"><Icon icon="solar:play-bold" color="green" style="font-size: 18px;"/></a></button
               >
               <button on:click={toggleFullScreen} class="btn btn-sm">
                 {#if isFullScreen}
@@ -85,10 +91,26 @@
         <div class="mockup-browser border bg-base-300">
           <div class="mockup-browser-toolbar">
             <div class="btn-group">
-              <button on:click={showHtml} class="btn btn-sm">HTML</button>
-              <button on:click={showCss} class="btn btn-sm">CSS</button>
+              <button on:click={showHtml} class="btn btn-sm"><Icon
+                icon="vscode-icons:file-type-html"
+                style="font-size: 18px;"
+              /></button>
+              <button on:click={showCss} class="btn btn-sm"> <Icon
+                icon="vscode-icons:file-type-css"
+                style="font-size: 18px;"
+              /></button>
+              <button class="btn btn-sm"
+                ><a href="/preview" target="_blank"><Icon icon="solar:play-bold" color="green" style="font-size: 18px;"/></a></button
+              >
               <button on:click={toggleFullScreen} class="btn btn-sm">
-                {isFullScreen ? "Exit Fullscreen" : "Full Screen"}
+                {#if isFullScreen}
+                  <Icon
+                    icon="gridicons:fullscreen-exit"
+                    style="font-size: 18px;"
+                  />
+                {:else}
+                  <Icon icon="map:fullscreen" style="font-size: 16px;"/>
+                {/if}
               </button>
             </div>
           </div>
