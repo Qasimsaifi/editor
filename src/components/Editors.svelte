@@ -1,6 +1,6 @@
 <script>
   import CodeMirror from "svelte-codemirror-editor";
-  import { javascript } from "@codemirror/lang-javascript";
+  import { javascript ,snippets} from "@codemirror/lang-javascript";
   import { oneDark } from "@codemirror/theme-one-dark";
   import { html, autoCloseTags } from "@codemirror/lang-html";
   import { css } from "@codemirror/lang-css";

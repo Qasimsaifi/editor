@@ -128,7 +128,7 @@ li {
         if (taskText !== "") {
             const li = document.createElement("li");
             const taskTextSpan = document.createElement("span");
-            taskTextSpan.textContent = taskText;
+            taskTextSpan.textContent =taskText;
 
             const removeBtn = document.createElement("button");
             removeBtn.textContent = "Remove";

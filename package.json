@@ -24,6 +24,8 @@
 		"@codemirror/lang-html": "^6.4.6",
 		"@codemirror/lang-javascript": "^6.2.1",
 		"@codemirror/theme-one-dark": "^6.1.2",
-		"svelte-codemirror-editor": "^1.1.0"
+		"svelte-codemirror-editor": "^1.1.0",
+		"xterm": "^5.2.1",
+		"xterm-addon-fit": "^0.7.0"
 	}
 }
