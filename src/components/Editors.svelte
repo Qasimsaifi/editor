@@ -56,7 +56,7 @@
         <div class="mockup-browser border bg-base-300">
           <div class="mockup-browser-toolbar">
             <div class="btn-group">
-              <button on:click={showHtml} class="btn btn-sm"
+              <button on:click={showHtml} class="btn btn-sm btn-outline"
                 ><Icon
                   icon="vscode-icons:file-type-html"
                   style="font-size: 18px;"
@@ -123,7 +123,7 @@
                   style="font-size: 18px;"
                 /></button
               >
-              <button on:click={showCss} class="btn btn-sm">
+              <button on:click={showCss} class="btn btn-sm btn-outline">
                 <Icon
                   icon="vscode-icons:file-type-css"
                   style="font-size: 18px;"
@@ -191,7 +191,7 @@
                   style="font-size: 18px;"
                 /></button
               >
-              <button on:click={showJs} class="btn btn-sm">
+              <button on:click={showJs} class="btn btn-sm btn-outline">
                 <Icon
                   icon="vscode-icons:file-type-js"
                   style="font-size: 18px;"

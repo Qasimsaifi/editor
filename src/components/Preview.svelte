@@ -12,7 +12,7 @@
 
 <div class="mockup-browser border bg-base-300 mr-1">
   <div class="mockup-browser-toolbar">
-    <div class="input">
+    <div class="input ">
       <a target="_blank" href="{hostedDomainURL}/preview">{hostedDomainURL}/preview</a>
     </div>
   </div>
