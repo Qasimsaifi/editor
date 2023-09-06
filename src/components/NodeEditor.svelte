@@ -5,7 +5,25 @@
   import Terminal from "./Terminal.svelte";
   let nodeCode;
   if (typeof localStorage !== "undefined") {
-    nodeCode = localStorage.getItem("nodeCode") || "o";
+    nodeCode =
+      localStorage.getItem("nodeCode") ||
+      `function createStarPattern(rows) {
+  for (let i = 1; i <= rows; i++) {
+    let pattern = '';
+    for (let j = 1; j <= rows - i; j++) {
+      pattern += ' ';
+    }
+    for (let k = 1; k <= i * 2 - 1; k++) {
+      pattern += '*';
+    }
+
+    console.log(pattern);
+  }
+}
+
+const numberOfRows = 5;
+createStarPattern(numberOfRows);
+`;
   }
   let executionResult = "";
   let isExecuting = false; // Track execution state
