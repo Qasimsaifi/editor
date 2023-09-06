@@ -6,15 +6,17 @@ Sure, here's a sample README.md for your Svelte CodeMirror Editor component:
 This is a Svelte component that provides a CodeMirror-based code editor for HTML, CSS, and JavaScript. It allows you to switch between the different code languages and supports real-time updates and full-screen mode.
 
 ## Installation
+```
 
 To use this component in your Svelte project, you can follow these steps:
 
 1. Install the required dependencies:
-   ```
+   ```bash
    npm install svelte-codemirror-editor @codemirror/lang-javascript @codemirror/theme-one-dark @codemirror/lang-html @codemirror/lang-css
    ```
 
 2. Import the necessary modules and components in your Svelte file:
+
    ```javascript
    import CodeMirror from "svelte-codemirror-editor";
    import { javascript, snippets } from "@codemirror/lang-javascript";
