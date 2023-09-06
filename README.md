@@ -1,38 +1,65 @@
-# create-svelte
+Sure, here's a sample README.md for your Svelte CodeMirror Editor component:
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+```markdown
+# Svelte CodeMirror Editor
 
-## Creating a project
+This is a Svelte component that provides a CodeMirror-based code editor for HTML, CSS, and JavaScript. It allows you to switch between the different code languages and supports real-time updates and full-screen mode.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Installation
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+To use this component in your Svelte project, you can follow these steps:
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+1. Install the required dependencies:
+   ```
+   npm install svelte-codemirror-editor @codemirror/lang-javascript @codemirror/theme-one-dark @codemirror/lang-html @codemirror/lang-css
+   ```
 
-## Developing
+2. Import the necessary modules and components in your Svelte file:
+   ```javascript
+   import CodeMirror from "svelte-codemirror-editor";
+   import { javascript, snippets } from "@codemirror/lang-javascript";
+   import { oneDark } from "@codemirror/theme-one-dark";
+   import { html, autoCloseTags } from "@codemirror/lang-html";
+   import { css } from "@codemirror/lang-css";
+   import { goto } from "$app/navigation";
+   import { fullscreenStore } from "../store/fullscreenStore";
+   import Icon from "@iconify/svelte";
+   ```
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+3. Use the `CodeMirror` component in your Svelte file, passing in the required props:
+   ```javascript
+   <CodeMirror
+     bind:value={htmlCode}
+     lang={html()}
+     theme={oneDark}
+     styles={{
+       "&": {
+         width: "100%", // Full width
+         height: "92vh",
+         fontSize: "17px",
+       },
+     }}
+     on:change={onChange}
+   />
+   ```
 
-```bash
-npm run dev
+4. Customize the code as needed for your project.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## Usage
 
-## Building
+- Use the buttons in the editor's toolbar to switch between HTML, CSS, and JavaScript code.
+- Click the "Preview" button to open a preview of your code in a new tab.
+- Toggle full-screen mode using the full-screen button.
 
-To create a production version of your app:
+## Local Storage
 
-```bash
-npm run build
-```
+The component automatically stores your HTML, CSS, and JavaScript code in local storage, so you can continue your work where you left off.
 
-You can preview the production build with `npm run preview`.
+## License
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+This project is licensed under the MIT License. Feel free to use and modify it for your needs.
+
+## Author
+
+This component was created by Kasim saifi. If you have any questions or suggestions, feel free to reach out.
+`
