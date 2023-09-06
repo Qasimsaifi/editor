@@ -4,11 +4,11 @@
   import { fullscreenStore } from "../store/fullscreenStore";
   export let htmlCode = "";
   export let cssCode = "";
+  export let jsCode = "";
   let isFullScreen;
-fullscreenStore.subscribe((value) => {
-  isFullScreen = value;
-  console.log(isFullScreen); // Log the value whenever it changes
-});
+  fullscreenStore.subscribe((value) => {
+    isFullScreen = value; // Log the value whenever it changes
+  });
 
   if (typeof localStorage !== "undefined") {
     htmlCode =
@@ -61,22 +61,25 @@ body {
     color: #555;
 }
 `;
+
+    jsCode = localStorage.getItem("jsCode") || "console.log('hello world')";
   }
-  function updateCode(newHtmlCode, newCssCode) {
+  function updateCode(newHtmlCode, newCssCode, newJsCode) {
     htmlCode = newHtmlCode;
     cssCode = newCssCode;
+    jsCode = newJsCode;
   }
 </script>
+
 {#if isFullScreen}
-  <Editors bind:htmlCode bind:cssCode {updateCode} />
+  <Editors bind:htmlCode bind:cssCode bind:jsCode {updateCode} />
 {:else}
   <div class="flex flex-col lg:flex-row h-screen">
     <div class="w-full lg:w-1/2">
-      <Editors bind:htmlCode bind:cssCode {updateCode} />
+      <Editors bind:htmlCode bind:cssCode bind:jsCode {updateCode} />
     </div>
     <div class="w-full lg:w-1/2">
-      <Preview {htmlCode} {cssCode} />
+      <Preview {htmlCode} {cssCode} {jsCode}/>
     </div>
   </div>
 {/if}
-

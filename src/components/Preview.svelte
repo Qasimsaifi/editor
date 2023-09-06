@@ -1,8 +1,8 @@
-<!-- Preview.svelte -->
-
 <script>
   export let htmlCode = ""; // Default HTML code
   export let cssCode = ""; // Default CSS code
+  export let jsCode = "";
+  let slash = "/"
   let hostedDomainURL;
   if (typeof localStorage !== "undefined") {
     hostedDomainURL =
@@ -30,6 +30,7 @@
             </head>
             <body>
               <div>${htmlCode}</div>
+              <script>${jsCode}<${slash}script>
             </body>
           </html>
         `}

@@ -3,11 +3,14 @@
 
   let htmlCode = '';
   let cssCode = '';
+  let jsCode = ''
 
   // Check if localStorage is available before using it
   if (typeof localStorage !== 'undefined') {
     htmlCode = localStorage.getItem('htmlCode') || '';
     cssCode = localStorage.getItem('cssCode') || '';
+    jsCode = localStorage.getItem('jsCode') || '';
+
   }
 
   // Listen for changes in localStorage
@@ -19,8 +22,11 @@
     if (e.key === 'cssCode') {
       cssCode = e.newValue || '';
     }
+    if (e.key === 'jsCode') {
+      jsCode = e.newValue || '';
+    }
   });
 }
 </script>
 
-<Preview {htmlCode} {cssCode} />
+<Preview {htmlCode} {cssCode} {jsCode}/>
