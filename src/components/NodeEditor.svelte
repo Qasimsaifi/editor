@@ -35,8 +35,8 @@ createStarPattern(numberOfRows);
   function captureConsoleLog() {
     const log = console.log;
     console.log = function (message) {
-      executionResult += message + "\n"; // Append log message to execution result
-      log.apply(console, arguments); // Call the original console.log
+      executionResult = message + "\n"; 
+      log.apply(console, arguments);
     };
   }
 
