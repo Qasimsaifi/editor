@@ -3,7 +3,12 @@
   import { javascript } from "@codemirror/lang-javascript";
   import { oneDark } from "@codemirror/theme-one-dark";
   import Terminal from "./Terminal.svelte";
+
   let nodeCode;
+  let executionResult = ""; // To store execution output
+  let isExecuting = false; // Track execution state
+
+  // Initialize nodeCode with default code or retrieve it from localStorage
   if (typeof localStorage !== "undefined") {
     nodeCode =
       localStorage.getItem("nodeCode") ||
@@ -25,43 +30,46 @@ const numberOfRows = 5;
 createStarPattern(numberOfRows);
 `;
   }
-  let executionResult = "";
-  let isExecuting = false; // Track execution state
 
-  async function executeCode() {
+  // Capture console.log output and display it
+  function captureConsoleLog() {
+    const log = console.log;
+    console.log = function (message) {
+      executionResult += message + "\n"; // Append log message to execution result
+      log.apply(console, arguments); // Call the original console.log
+    };
+  }
+
+  function executeCode() {
     isExecuting = true; // Set execution state to true
+    executionResult = ""; // Reset execution result
     try {
-      const response = await fetch("https://node-executer.vercel.app/execute", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ code: nodeCode }),
-      });
+      captureConsoleLog(); // Capture console.log output
+      eval(nodeCode); // Execute the code
 
-      if (response.ok) {
-        const data = await response.json();
-        executionResult = data.output;
-      } else {
-        executionResult = "Error executing code.";
-      }
+      // Note: Console logs will be captured and displayed in the executionResult variable
     } catch (error) {
-      executionResult = "An error occurred.";
+      executionResult = "Error executing code: " + error.message;
     } finally {
       isExecuting = false; // Reset execution state
     }
   }
+
   function onChange() {
     localStorage.setItem("nodeCode", nodeCode);
   }
 </script>
+
+<style>
+  /* Add your custom CSS styles here */
+</style>
 
 <div class="flex flex-col lg:flex-row h-screen">
   <!-- Left Column (Code Editor) -->
   <div class="w-full lg:w-3/4 lg:pl-2">
     <div class="mockup-browser border bg-base-300">
       <div class="mockup-browser-toolbar">
-        <!-- Add the "Run Code" button here with conditional text -->
+        <!-- "Run Code" button -->
         <button
           on:click={executeCode}
           class="btn btn-success btn-sm"

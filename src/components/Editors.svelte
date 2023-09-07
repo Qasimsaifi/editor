@@ -54,8 +54,8 @@
     {#if isHtmlEditor}
       <div class="mx-1">
         <div class="mockup-browser border bg-base-300">
-          <div class="mockup-browser-toolbar">
-            <div class="btn-group">
+        <div class="mockup-browser-toolbar">
+          <div class="btn-group">
               <button on:click={showHtml} class="btn btn-sm btn-outline"
                 ><Icon
                   icon="vscode-icons:file-type-html"
