@@ -3,10 +3,11 @@
   import { javascript } from "@codemirror/lang-javascript";
   import { oneDark } from "@codemirror/theme-one-dark";
   import Terminal from "./Terminal.svelte";
-
+  import { writable } from 'svelte/store';
+  import Icon from "@iconify/svelte";
   let nodeCode;
   let executionResult = ""; // To store execution output
-  let isExecuting = false; // Track execution state
+  let isExecuting = writable(false); // Track execution state
 
   // Initialize nodeCode with default code or retrieve it from localStorage
   if (typeof localStorage !== "undefined") {
@@ -31,27 +32,20 @@ createStarPattern(numberOfRows);
 `;
   }
 
-  // Capture console.log output and display it
-  function captureConsoleLog() {
-    const log = console.log;
-    console.log = function (message) {
-      executionResult = message + "\n"; 
-      log.apply(console, arguments);
-    };
-  }
-
-  function executeCode() {
-    isExecuting = true; // Set execution state to true
+  async function executeCode() {
+    isExecuting.set(true); // Set execution state to true
     executionResult = ""; // Reset execution result
     try {
-      captureConsoleLog(); // Capture console.log output
-      eval(nodeCode); // Execute the code
+      // Capture console.log output and display it in the terminal
+      console.log = function (message) {
+        executionResult += message + "\n"; // Append log message to execution result
+      };
 
-      // Note: Console logs will be captured and displayed in the executionResult variable
+      await eval(nodeCode); // Execute the code
     } catch (error) {
-      executionResult = "Error executing code: " + error.message;
+      executionResult = "Error executing code: " + error;
     } finally {
-      isExecuting = false; // Reset execution state
+      isExecuting.set(false); // Reset execution state
     }
   }
 
@@ -72,13 +66,17 @@ createStarPattern(numberOfRows);
         <!-- "Run Code" button -->
         <button
           on:click={executeCode}
-          class="btn btn-success btn-sm"
-          disabled={isExecuting}
+          class="btn btn-sm btn-neutral"
+          disabled={$isExecuting}
         >
-          {#if isExecuting}
-            <span class="loading loading-spinner loading-sm" />
+          {#if $isExecuting}
+          <span class="loading loading-spinner text-success"></span>
           {:else}
-            Run
+          <Icon
+          icon="solar:play-bold"
+          color="green"
+          style="font-size: 18px;"
+        />
           {/if}
         </button>
       </div>
